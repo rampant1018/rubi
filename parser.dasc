@@ -387,7 +387,8 @@ int expression(int pos, int status)
         | call dword [esi + 0x14]
     } else if (skip("for")) {
         assignment();
-        skip(",");
+        if (!skip(","))
+            error("%d: expecting ','", tok.tok[tok.pos].nline);
         whileStmt();
     } else if (skip("while")) {
         whileStmt();

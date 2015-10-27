@@ -280,7 +280,8 @@ static int32_t functionStmt()
             tok.pos++;
             argsc++;
         } while(skip(","));
-        skip(")");
+        if (!skip(")"))
+                error("%d: expecting ')'", tok.tok[tok.pos].nline);
     }
     int func_addr = npc++;
     dasm_growpc(&d, npc);
